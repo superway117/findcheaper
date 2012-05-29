@@ -1,0 +1,54 @@
+﻿{% extends "_result_base.htm" %} 
+
+{% block title %}
+   图书
+{% endblock %}
+
+{% block custjs %}
+
+<script type="text/javascript" id="js">
+$(document).ready(function() { 
+    $("#product_list_table").tablesorter();
+}); 
+</script>
+
+{% endblock %}
+
+
+{% block bodycontent %} 
+    <table id="product_list_table" class="tablesorter" width="95%"  border="0" cellpadding="0" cellspacing="1">
+    <thead>
+        <tr>
+        <th class="header" width="40%">书&nbsp;名</th>
+        <th class="header" width="18%">作&nbsp;者</th>
+        <th class="header" width="15%">出&nbsp;版&nbsp;社</th>
+        <th class="header" width="8%">折&nbsp;扣&nbsp;价</th>
+        <th class="header" width="8%">原&nbsp;价</th>
+        <th class="header">信息来源</th>
+        </tr> 
+    </thead>
+    <tbody>
+        {% for item in amazon_search_list %}
+        <tr>
+        <td width="40%"><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td width="18%">{{ item.author}}</td>
+        <td width="15%">{{ item.company}}</td>
+        <td width="8%">{{ item.current_price}}</td>
+        <td width="8%">{{ item.origin_price}}</td>
+        <td><a href="http://www.amazon.cn/">卓越亚马逊</a></td>
+        </tr>
+        {% endfor %}
+        {% for item in dangdang_search_list %}
+        <tr>
+        <td width="40%"><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td width="18%">{{ item.author}}</td>
+        <td width="15%">{{ item.company}}</td>
+        <td width="8%">{{ item.current_price}}</td>
+        <td width="8%">{{ item.origin_price}}</td>
+        <td><a href="http://www.dangdang.com/">当&nbsp;当</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %} 
+

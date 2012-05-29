@@ -1,0 +1,87 @@
+﻿<head> 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="static/table.css" />
+<title>
+	{% block title %}找便宜{% endblock %} 
+</title> 
+<script type="text/javascript" src="lib/jquery-latest.js"></script>
+<script type="text/javascript" src="lib/jquery.tablesorter.js"></script>
+<script type="text/javascript">
+function changeAction(radio_url)
+{
+  var sb_form=document.getElementById("sb_form")
+  sb_form.action=radio_url
+}
+onerror=handleErr
+var txt=""
+function handleErr(msg,url,l)
+{
+txt="There was an error on this page.\n\n"
+txt+="Error: " + msg + "\n"
+txt+="URL: " + url + "\n"
+txt+="Line: " + l + "\n\n"
+txt+="Click OK to continue.\n\n"
+alert(txt)
+return true
+}
+</script>
+{% block custjs %}
+{% endblock %} 
+</head> 
+<body> 
+<table style="margin-left: 15px;" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td>
+<div id="find_class">
+<form name="class_form">
+<input id="book" name="meta" value="" type="radio" onClick="changeAction('/findcheaperbook')"
+        {% ifequal path 'findcheaperbook_result.htm' %} 
+               		checked="checked" 
+        {% endifequal %} >
+<label for="book">图&nbsp;书</label>
+<input id="digital" name="meta" value="" type="radio" onClick="changeAction('/findcheaperdigital')"
+        {% ifequal path 'findcheaperdigital_result.htm' %} 
+               		checked="checked" 
+        {% endifequal %} >
+<label for="digital">数&nbsp;码</label>
+<input id="all" name="meta" value="" type="radio" onClick="changeAction('/findcheaperall')"
+        {% ifequal path 'findcheaperall_result.htm' %} 
+               		checked="checked" 
+        {% endifequal %} > 
+<label for="all">所有商品</label>
+
+</form>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<tbody>
+<tr valign="top">
+<td style="height: 62px; padding-left: 92px;" nowrap="nowrap">
+<form name="sb_form" id="sb_form" method="post" 
+        {% ifequal path 'findcheaperbook_result.htm' %} 
+            action="/findcheaperbook" 
+        {% endifequal %} 
+        {% ifequal path 'findcheaperdigital_result.htm' %} 
+            action="/findcheaperdigital" 
+        {% endifequal %} 
+        {% ifequal path 'findcheaperall_result.htm' %} 
+            action="/findcheaperall" 
+        {% endifequal %} 
+        >
+<input name="content" id="kw" size="42" maxlength="100" type="text">
+<input value="找便宜" id="sb" type="submit">
+</form>
+</td>
+</tr>
+</tbody>
+<div id="bodycontent"> 
+      {% block bodycontent %} 
+      {% endblock %} 
+</div> 
+<br><br><br><br>
+<p style="height: 30px;"> Powered by Superway</p>
+</body> 
+</html> 

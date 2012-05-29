@@ -1,0 +1,72 @@
+﻿{% extends "_result_base.htm" %} 
+
+{% block title %}
+   所有商品
+{% endblock %}
+
+{% block custjs %}
+
+<script type="text/javascript" id="js">
+$(document).ready(function() { 
+    $("#product_list_table").tablesorter();
+}); 
+</script>
+
+{% endblock %}
+
+
+{% block bodycontent %} 
+    <table id="product_list_table" class="tablesorter" width="95%"  border="0" cellpadding="0" cellspacing="1">
+    <thead>
+        <tr>
+        <th class="header">商&nbsp;品</th>
+        <th class="header">折&nbsp;扣&nbsp;价</th>
+        <th class="header">原&nbsp;价</th>
+        <th class="header">信息来源</th>
+        </tr> 
+    </thead>
+    <tbody>
+        {% for item in amazon_search_list %}
+        <tr>
+        <td><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td>{{ item.current_price}}</td>
+        <td>{{ item.origin_price}}</td>
+        <td><a href="http://www.amazon.cn/">卓越亚马逊</a></td>
+        </tr>
+        {% endfor %}
+        {% for item in dangdang_search_list %}
+        <tr>
+        <td><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td>{{ item.current_price}}</td>
+        <td>{{ item.origin_price}}</td>
+        <td><a href="http://www.dangdang.com/">当&nbsp;当</a></td>
+        </tr>
+        {% endfor %}
+        {% for item in buy360_search_list %}
+        <tr>
+        <td><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td>{{ item.current_price}}</td>
+        <td>{{ item.origin_price}}</td>
+        <td><a href="http://360buy.com">京东商城</a></td>
+        </tr>
+        {% endfor %}
+        {% for item in icson_search_list %}
+        <tr>
+        <td><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td>{{ item.current_price}}</td>
+        <td>{{ item.origin_price}}</td>
+        <td><a href="http://www.icson.com/Items/Default.aspx">易讯网</a></td>
+        </tr>
+        {% endfor %}
+        {% for item in newegg_search_list %}
+        <tr>
+        <td><a href={{ item.url}} target=_blank>{{item.name.strip}}</a></td>
+        <td>{{ item.current_price}}</td>
+        <td>{{ item.origin_price}}</td>
+        <td><a href="http://www.newegg.com.cn/Default.aspx">新蛋</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %} 
+
